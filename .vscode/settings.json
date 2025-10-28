@@ -1,8 +1,8 @@
 {
-	"editor.formatOnSave": true,
-	"editor.defaultFormatter": "biomejs.biome",
-	"cSpell.words": ["scule", "nitropack"],
-	"[typescript]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	}
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "cSpell.words": ["scule", "nitropack"],
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  }
 }
