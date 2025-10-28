@@ -1,5 +1,6 @@
 {
   "name": "nitro-app",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "nitro build",
