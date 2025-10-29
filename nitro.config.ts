@@ -16,10 +16,13 @@ export default defineNitroConfig({
       ...(await importsHelper("./db/model")),
       ...(await importsHelper("./db/schema", camelCase)),
       { name: "parse", from: "set-cookie-parser" },
-      { name: "EventHandlerRequest", from: "h3", type: true },
-      { name: "H3Event", from: "h3", type: true },
       { name: "v4", from: "uuid" },
       { name: "createHash", from: "crypto" },
+      { name: "default", as: "jwt", from: "jsonwebtoken" },
+      { name: "EventHandlerRequest", from: "h3", type: true },
+      { name: "H3Event", from: "h3", type: true },
+      { name: "StringValue", from: "ms", type: true },
+      { name: "JwtPayload", from: "jsonwebtoken", type: true },
     ],
     presets: [
       {

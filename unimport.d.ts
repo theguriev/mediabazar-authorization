@@ -82,6 +82,7 @@ declare global {
   const isWebResponse: typeof import('h3').isWebResponse
   const issueAccessToken: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/issueAccessToken').default
   const issueRefreshToken: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/issueRefreshToken').default
+  const jwt: typeof import('jsonwebtoken').default
   const lazyEventHandler: typeof import('h3').lazyEventHandler
   const nitroPlugin: typeof import('nitropack/runtime/internal/plugin').nitroPlugin
   const parse: typeof import('set-cookie-parser').parse
@@ -141,4 +142,10 @@ declare global {
   // @ts-ignore
   export type { EventHandlerRequest, H3Event } from 'h3'
   import('h3')
+  // @ts-ignore
+  export type { StringValue } from 'ms'
+  import('ms')
+  // @ts-ignore
+  export type { JwtPayload } from 'jsonwebtoken'
+  import('jsonwebtoken')
 }
