@@ -1,7 +1,7 @@
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "biomejs.biome",
-  "cSpell.words": ["nitropack", "scule", "Unimport", "unplugin"],
+  "cSpell.words": ["nitropack", "scule", "Unimport", "unplugin", "uuidv"],
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },

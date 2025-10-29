@@ -1,6 +1,5 @@
 import { defineNitroConfig } from "nitropack/config";
-import { camelCase } from "scule";
-import importsHelper from "./importsHelper";
+import { baseImports } from "./imports";
 
 // https://nitro.build/config
 export default defineNitroConfig({
@@ -12,19 +11,7 @@ export default defineNitroConfig({
   },
   imports: {
     dts: true,
-    imports: [
-      ...(await importsHelper("./db/model")),
-      ...(await importsHelper("./db/schema", camelCase)),
-      { name: "parse", from: "set-cookie-parser" },
-      { name: "v4", from: "uuid" },
-      { name: "createHash", from: "crypto" },
-      { name: "SignJWT", from: "jose" },
-      { name: "jwtVerify", from: "jose" },
-      { name: "EventHandlerRequest", from: "h3", type: true },
-      { name: "H3Event", from: "h3", type: true },
-      { name: "StringValue", from: "ms", type: true },
-      { name: "JWTPayload", from: "jose", type: true },
-    ],
+    imports: [...baseImports],
     presets: [
       {
         from: "zod",

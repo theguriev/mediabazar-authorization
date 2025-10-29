@@ -1,3 +1,3 @@
-const issueRefreshToken = () => passwordHash(v4());
+const issueRefreshToken = () => passwordHash(uuidv4());
 
 export default issueRefreshToken;

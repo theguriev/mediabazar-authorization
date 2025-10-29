@@ -1,5 +1,6 @@
 export {}
 declare global {
+  const $fetch: typeof import('ofetch').$fetch
   const ModelToken: typeof import('/Users/gurieveugen/work/mediabazar/db/model/token').default
   const ModelUser: typeof import('/Users/gurieveugen/work/mediabazar/db/model/user').default
   const SignJWT: typeof import('jose').SignJWT
@@ -133,7 +134,6 @@ declare global {
   const useRuntimeConfig: typeof import('nitropack/runtime/internal/config').useRuntimeConfig
   const useSession: typeof import('h3').useSession
   const useStorage: typeof import('nitropack/runtime/internal/storage').useStorage
-  const v4: typeof import('uuid').v4
   const verifyAccessToken: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/verifyAccessToken').default
   const writeEarlyHints: typeof import('h3').writeEarlyHints
   const z: typeof import('zod').z
