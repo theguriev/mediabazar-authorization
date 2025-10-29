@@ -2,6 +2,7 @@ export {}
 declare global {
   const ModelToken: typeof import('/Users/gurieveugen/work/mediabazar/db/model/token').default
   const ModelUser: typeof import('/Users/gurieveugen/work/mediabazar/db/model/user').default
+  const SignJWT: typeof import('jose').SignJWT
   const appendCorsHeaders: typeof import('h3').appendCorsHeaders
   const appendCorsPreflightHeaders: typeof import('h3').appendCorsPreflightHeaders
   const appendHeader: typeof import('h3').appendHeader
@@ -82,7 +83,7 @@ declare global {
   const isWebResponse: typeof import('h3').isWebResponse
   const issueAccessToken: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/issueAccessToken').default
   const issueRefreshToken: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/issueRefreshToken').default
-  const jwt: typeof import('jsonwebtoken').default
+  const jwtVerify: typeof import('jose').jwtVerify
   const lazyEventHandler: typeof import('h3').lazyEventHandler
   const nitroPlugin: typeof import('nitropack/runtime/internal/plugin').nitroPlugin
   const parse: typeof import('set-cookie-parser').parse
@@ -133,7 +134,7 @@ declare global {
   const useSession: typeof import('h3').useSession
   const useStorage: typeof import('nitropack/runtime/internal/storage').useStorage
   const v4: typeof import('uuid').v4
-  const verify: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/verify').default
+  const verifyAccessToken: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/verifyAccessToken').default
   const writeEarlyHints: typeof import('h3').writeEarlyHints
   const z: typeof import('zod').z
 }
@@ -146,6 +147,6 @@ declare global {
   export type { StringValue } from 'ms'
   import('ms')
   // @ts-ignore
-  export type { JwtPayload } from 'jsonwebtoken'
-  import('jsonwebtoken')
+  export type { JWTPayload } from 'jose'
+  import('jose')
 }

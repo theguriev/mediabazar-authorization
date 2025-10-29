@@ -1,7 +1,7 @@
 const MONTH = 1000 * 60 * 60 * 24 * 30;
 const MINUTES_15 = 1000 * 60 * 15;
 
-const useTokens = ({
+const useTokens = async ({
   event,
   userId,
   role = "user",
@@ -24,7 +24,7 @@ const useTokens = ({
   const expiresRefreshToken = new Date(timestamp + MONTH);
   const expiresAccessToken = new Date(timestamp + MINUTES_15);
   const initialId = id || userId;
-  const accessToken = issueAccessToken(
+  const accessToken = await issueAccessToken(
     {
       userId,
       role,

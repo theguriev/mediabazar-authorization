@@ -56,18 +56,9 @@ const ctx: Context = {
     SECRET: "gurievcreative",
     PORT: "4000",
     API_URL: "http://localhost:4000",
-    VALID_ADMIN_ACCESS_TOKEN: issueAccessToken(
-      { userId: adminId, role: "admin", id: adminId },
-      { secret: "gurievcreative" },
-    ),
-    VALID_REGULAR_ACCESS_TOKEN: issueAccessToken(
-      { userId: regularId, role: "user", id: regularId },
-      { secret: "gurievcreative" },
-    ),
-    VALID_ADMIN_ACCESS_TOKEN_WITH_REGULAR_ID: issueAccessToken(
-      { userId: regularId, role: "admin", id: adminId },
-      { secret: "gurievcreative" },
-    ),
+    VALID_ADMIN_ACCESS_TOKEN: "",
+    VALID_REGULAR_ACCESS_TOKEN: "",
+    VALID_ADMIN_ACCESS_TOKEN_WITH_REGULAR_ID: "",
   },
   fetch: (url, opts): Promise<Response> =>
     $fetch(joinURL(ctx.server!.url, url.slice(1)), {
@@ -85,6 +76,20 @@ export const setup = async () => {
     console.log("log: no temp dir to remove");
   });
   await fsp.mkdir(presetTmpDir, { recursive: true });
+
+  // Generate access tokens
+  ctx.env.VALID_ADMIN_ACCESS_TOKEN = await issueAccessToken(
+    { userId: adminId, role: "admin", id: adminId },
+    { secret: "gurievcreative" },
+  );
+  ctx.env.VALID_REGULAR_ACCESS_TOKEN = await issueAccessToken(
+    { userId: regularId, role: "user", id: regularId },
+    { secret: "gurievcreative" },
+  );
+  ctx.env.VALID_ADMIN_ACCESS_TOKEN_WITH_REGULAR_ID = await issueAccessToken(
+    { userId: regularId, role: "admin", id: adminId },
+    { secret: "gurievcreative" },
+  );
 
   mongod = await MongoMemoryServer.create();
   ctx.mongo = mongod;
