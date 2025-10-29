@@ -11,10 +11,15 @@ export default defineNitroConfig({
     secret: "secret",
   },
   imports: {
+    dts: true,
     imports: [
       ...(await importsHelper("./db/model")),
       ...(await importsHelper("./db/schema", camelCase)),
       { name: "parse", from: "set-cookie-parser" },
+      { name: "EventHandlerRequest", from: "h3", type: true },
+      { name: "H3Event", from: "h3", type: true },
+      { name: "v4", from: "uuid" },
+      { name: "createHash", from: "crypto" },
     ],
     presets: [
       {
