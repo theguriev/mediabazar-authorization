@@ -202,4 +202,169 @@ describe.sequential("Authorization", () => {
       });
     });
   });
+
+  describe("GET /", () => {
+    it("gets 500 on wrong access token", async () => {
+      await $fetch("/", {
+        baseURL: "http://localhost:3000",
+        headers: {
+          Accept: "application/json",
+          Cookie: "accessToken=invalid;",
+        },
+        ignoreResponseError: true,
+        onResponse: ({ response }) => {
+          expect(response.status).toBe(500);
+          expect(response._data.message).toBe("Invalid Compact JWS");
+        },
+      });
+    });
+
+    it("gets 200 valid user", async () => {
+      await $fetch("/", {
+        baseURL: "http://localhost:3000",
+        headers: {
+          Accept: "application/json",
+          Cookie: `accessToken=${validAccessToken.value};`,
+        },
+        onResponse: ({ response }) => {
+          expect(response.status).toBe(200);
+          expect(response._data.email).toBe(email);
+          expect(response._data.meta.firstName).toBe(firstName);
+          expect(response._data.meta.lastName).toBe(lastName);
+        },
+      });
+    });
+  });
+
+  describe("GET /refresh", () => {
+    it("gets 404 on invalid refresh token", async () => {
+      await $fetch("/refresh", {
+        baseURL: "http://localhost:3000",
+        headers: { Accept: "application/json" },
+        ignoreResponseError: true,
+        onResponse: ({ response }) => {
+          expect(response.status).toBe(404);
+          expect(response._data).toMatchObject({
+            message: "Refresh token not found!",
+          });
+        },
+      });
+    });
+    it("gets 200 on valid refresh token2", async () => {
+      await $fetch("/refresh", {
+        baseURL: "http://localhost:3000",
+        headers: {
+          Accept: "application/json",
+          Cookie: `refreshToken=${validRefreshToken.value}`,
+        },
+        onResponse: ({ response }) => {
+          expect(response.status).toBe(200);
+          accessAndRefreshToBeDefined(response);
+        },
+      });
+    });
+  });
+
+  describe("POST /forgot-password", () => {
+    it("gets 400 on validation errors", async () => {
+      await $fetch("/forgot-password", {
+        baseURL: "http://localhost:3000",
+        method: "POST",
+        headers: { Accept: "application/json" },
+        ignoreResponseError: true,
+        body: { email: "1" },
+        onResponse: ({ response }) => {
+          expect(response.status).toBe(400);
+          expect(response._data).toMatchObject({
+            url: "/forgot-password",
+            statusCode: 400,
+            statusMessage: "Validation Error",
+            message: "Validation Error",
+            data: [
+              {
+                code: "invalid_format",
+                message: "Invalid email address",
+                path: ["email"],
+              },
+            ],
+          });
+        },
+      });
+    });
+    it("gets 404 on invalid email", async () => {
+      await $fetch("/forgot-password", {
+        baseURL: "http://localhost:3000",
+        method: "POST",
+        headers: { Accept: "application/json" },
+        ignoreResponseError: true,
+        body: { email: "invalid@email.com" },
+        onResponse: ({ response }) => {
+          expect(response.status).toBe(404);
+          expect(response._data).toMatchObject({ message: "User not found!" });
+        },
+      });
+    });
+    it("gets 200 on valid email", async () => {
+      await $fetch("/forgot-password", {
+        baseURL: "http://localhost:3000",
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: { email },
+        onResponse: ({ response }) => {
+          expect(response.status).toBe(200);
+          expect(response._data).toMatchObject({ ok: true });
+        },
+      });
+    });
+  });
+
+  describe("GET /logout", () => {
+    it("gets 200 on valid logout", async () => {
+      await $fetch("/logout", {
+        baseURL: "http://localhost:3000",
+        headers: {
+          Accept: "application/json",
+          Cookie: `accessToken=${validAccessToken.value}`,
+        },
+        onResponse: ({ response }) => {
+          expect(response.status).toBe(200);
+          expect(response.headers.getSetCookie()).toMatchObject([
+            "accessToken=; Max-Age=0; Path=/",
+            "refreshToken=; Max-Age=0; Path=/",
+          ]);
+        },
+      });
+    });
+    it("gets 500 on invalid logout", () => {
+      expect(
+        async () =>
+          await $fetch("/logout", {
+            baseURL: "http://localhost:3000",
+            headers: {
+              Accept: "application/json",
+              Cookie: "accessToken=bullshit",
+            },
+          }),
+      ).rejects.toThrow(/500 Internal Server Error/);
+    });
+  });
+
+  describe("PUT /update-meta", () => {
+    it("changes the user name", async () => {
+      await $fetch("/update-meta", {
+        baseURL: "http://localhost:3000",
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          Cookie: `accessToken=${validAccessToken.value}`,
+        },
+        body: { meta: { firstName: "John", lastName: "Doe" } },
+        onResponse: ({ response }) => {
+          expect(response.status).toBe(200);
+          expect(response._data.meta.firstName).toBe("John");
+          expect(response._data.meta.lastName).toBe("Doe");
+        },
+      });
+    });
+  });
 });

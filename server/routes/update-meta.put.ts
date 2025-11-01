@@ -1,27 +1,25 @@
 const requestBodySchema = z.object({
-  meta: z.record(z.any())
-})
+  meta: z.record(z.string(), z.any()).optional(),
+});
 
 export default eventHandler(async (event) => {
-  const _id = await getUserId(event)
-  const {
-    meta
-  } = await zodValidateBody(event, requestBodySchema.parse)
+  const _id = await getUserId(event);
+  const { meta } = await zodValidateBody(event, requestBodySchema.parse);
   await ModelUser.updateOne(
     {
-      _id
+      _id,
     },
     {
       $set: {
-        meta
-      }
-    }
-  )
+        meta,
+      },
+    },
+  );
   const userExist = await ModelUser.findOne({
-    _id
-  })
+    _id,
+  });
   if (userExist === null) {
-    throw createError({ message: 'User not exists!', status: 409 })
+    throw createError({ message: "User not exists!", status: 409 });
   }
-  return userExist
-})
+  return userExist;
+});
