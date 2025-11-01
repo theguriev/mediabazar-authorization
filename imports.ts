@@ -16,6 +16,8 @@ export const baseImports = [
   { name: "StringValue", from: "ms", type: true },
   { name: "JWTPayload", from: "jose", type: true },
   { name: "Cookie", from: "set-cookie-parser", type: true },
+  { name: "v4", as: "uuidv4", from: "uuid" },
+  { name: "FetchResponse", from: "ofetch", type: true },
 ];
 
 export const testImports = [
@@ -24,8 +26,6 @@ export const testImports = [
   { name: "expect", from: "vitest" },
   { name: "beforeAll", from: "vitest" },
   { name: "afterAll", from: "vitest" },
-  { name: "v4", as: "uuidv4", from: "uuid" },
   { name: "parse", from: "set-cookie-parser" },
-  { name: "FetchResponse", from: "ofetch", type: true },
   ...baseImports,
 ];

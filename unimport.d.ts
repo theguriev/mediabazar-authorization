@@ -136,6 +136,7 @@ declare global {
   const useSession: typeof import('h3').useSession
   const useStorage: typeof import('nitropack/runtime/internal/storage').useStorage
   const useTokens: typeof import('/Users/gurieveugen/work/mediabazar/server/composables/useTokens').default
+  const uuidv4: typeof import('uuid').v4
   const verifyAccessToken: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/verifyAccessToken').default
   const writeEarlyHints: typeof import('h3').writeEarlyHints
   const z: typeof import('zod').z
@@ -156,4 +157,7 @@ declare global {
   // @ts-ignore
   export type { Cookie } from 'set-cookie-parser'
   import('set-cookie-parser')
+  // @ts-ignore
+  export type { FetchResponse } from 'ofetch'
+  import('ofetch')
 }
