@@ -1,11 +1,11 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "MediaBazar API",
-    "description": "Authentication and user management API for MediaBazar application",
+    "title": "mediabazar-authorization API",
+    "description": "Authentication and user management API for mediabazar-authorization application",
     "version": "1.0.0",
     "contact": {
-      "name": "MediaBazar Team"
+      "name": "mediabazar-authorization Team"
     }
   },
   "servers": [
