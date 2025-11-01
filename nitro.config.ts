@@ -4,6 +4,7 @@ import { baseImports } from "./imports";
 // https://nitro.build/config
 export default defineNitroConfig({
   compatibilityDate: "latest",
+  errorHandler: "~/error",
   srcDir: "server",
   runtimeConfig: {
     mongoUri: "mongodb://root:example@localhost:27017/",
@@ -18,6 +19,6 @@ export default defineNitroConfig({
         imports: ["z"],
       },
     ],
-    dirs: ["./composables"],
+    dirs: ["./server/composables"],
   },
 });

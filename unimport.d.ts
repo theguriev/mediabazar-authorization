@@ -42,6 +42,7 @@ declare global {
   const deleteCookie: typeof import('h3').deleteCookie
   const dynamicEventHandler: typeof import('h3').dynamicEventHandler
   const eventHandler: typeof import('h3').eventHandler
+  const extractSetCookie: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/extractSetCookie').default
   const fetchWithEvent: typeof import('h3').fetchWithEvent
   const fromNodeMiddleware: typeof import('h3').fromNodeMiddleware
   const fromPlainHandler: typeof import('h3').fromPlainHandler
@@ -134,14 +135,17 @@ declare global {
   const useRuntimeConfig: typeof import('nitropack/runtime/internal/config').useRuntimeConfig
   const useSession: typeof import('h3').useSession
   const useStorage: typeof import('nitropack/runtime/internal/storage').useStorage
+  const useTokens: typeof import('/Users/gurieveugen/work/mediabazar/server/composables/useTokens').default
   const verifyAccessToken: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/verifyAccessToken').default
   const writeEarlyHints: typeof import('h3').writeEarlyHints
   const z: typeof import('zod').z
+  const zodValidateBody: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/zodValidateBody').default
+  const zodValidateData: typeof import('/Users/gurieveugen/work/mediabazar/server/utils/zodValidateData').default
 }
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { EventHandlerRequest, H3Event } from 'h3'
+  export type { EventHandlerRequest, InferEventInput, ValidateFunction, H3Event } from 'h3'
   import('h3')
   // @ts-ignore
   export type { StringValue } from 'ms'
@@ -149,4 +153,7 @@ declare global {
   // @ts-ignore
   export type { JWTPayload } from 'jose'
   import('jose')
+  // @ts-ignore
+  export type { Cookie } from 'set-cookie-parser'
+  import('set-cookie-parser')
 }

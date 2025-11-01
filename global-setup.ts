@@ -47,15 +47,9 @@ const ctx: Context = {
   rootDir: fixtureDir,
   outDir: resolve(fixtureDir, presetTmpDir, ".output"),
   env: {
-    NITRO_BOT_TOKEN: "7826411058:AAEZYZPTy4hYe3WLDhhSL79VLMwvlw2JHbc",
-    NITRO_WALLET_PRIVATE_KEY:
-      "0x9383e92c466fa0da64f1892d3b761172641296543d4765128446009885268f95",
-    NITRO_NOTIFICATION_BASE: "http://localhost:4000",
-    NITRO_CURRENCY_SYMBOL: "nka",
-    CUSTOM_HELLO_THERE: "general",
     SECRET: "gurievcreative",
-    PORT: "4000",
-    API_URL: "http://localhost:4000",
+    PORT: "3000",
+    API_URL: "http://localhost:3000",
     VALID_ADMIN_ACCESS_TOKEN: "",
     VALID_REGULAR_ACCESS_TOKEN: "",
     VALID_ADMIN_ACCESS_TOKEN_WITH_REGULAR_ID: "",

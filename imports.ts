@@ -10,9 +10,12 @@ export const baseImports = [
   { name: "SignJWT", from: "jose" },
   { name: "jwtVerify", from: "jose" },
   { name: "EventHandlerRequest", from: "h3", type: true },
+  { name: "InferEventInput", from: "h3", type: true },
+  { name: "ValidateFunction", from: "h3", type: true },
   { name: "H3Event", from: "h3", type: true },
   { name: "StringValue", from: "ms", type: true },
   { name: "JWTPayload", from: "jose", type: true },
+  { name: "Cookie", from: "set-cookie-parser", type: true },
 ];
 
 export const testImports = [
@@ -23,5 +26,6 @@ export const testImports = [
   { name: "afterAll", from: "vitest" },
   { name: "v4", as: "uuidv4", from: "uuid" },
   { name: "parse", from: "set-cookie-parser" },
+  { name: "FetchResponse", from: "ofetch", type: true },
   ...baseImports,
 ];

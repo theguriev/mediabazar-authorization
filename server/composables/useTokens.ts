@@ -6,32 +6,22 @@ const useTokens = async ({
   userId,
   role = "user",
   id,
-  switchInfo,
 }: {
   event: H3Event<EventHandlerRequest>;
   userId: string;
   role?: string;
   id?: string;
-  switchInfo?: {
-    id: string;
-    index: number;
-    length: number;
-  };
 }) => {
   const refreshToken = issueRefreshToken();
   const { secret } = useRuntimeConfig();
   const timestamp = Date.now();
   const expiresRefreshToken = new Date(timestamp + MONTH);
   const expiresAccessToken = new Date(timestamp + MINUTES_15);
-  const initialId = id || userId;
   const accessToken = await issueAccessToken(
     {
-      userId,
+      sub: userId,
       role,
-      id: initialId,
-      switchInfoId: switchInfo?.id,
-      switchInfoIndex: switchInfo?.index,
-      switchInfoLength: switchInfo?.length,
+      id: id || userId,
     },
     { secret },
   );
@@ -52,12 +42,6 @@ const useTokens = async ({
     const refreshTokenDocument = new ModelToken({
       userId,
       token: refreshToken,
-      timestamp,
-      id,
-      role,
-      switchInfoId: switchInfo?.id,
-      switchInfoIndex: switchInfo?.index,
-      switchInfoLength: switchInfo?.length,
     });
     return await refreshTokenDocument.save();
   };
@@ -65,7 +49,7 @@ const useTokens = async ({
   const deleteByUserId = async () => {
     const refreshTokenDocument = new ModelToken();
     return await refreshTokenDocument.collection.deleteMany({
-      userId: initialId,
+      userId,
     });
   };
   return { refreshToken, accessToken, timestamp, save, deleteByUserId };

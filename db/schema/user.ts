@@ -2,7 +2,8 @@ import { Schema } from "mongoose";
 
 const userSchema = new Schema(
   {
-    email: String,
+    role: { type: String, default: "user" },
+    email: { type: String, unique: true },
     password: String,
     forgotPassword: {
       token: String,
